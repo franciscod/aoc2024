@@ -1,0 +1,60 @@
+YEAR = 2024
+
+edit:
+	touch -a solve.py test.txt
+	vim -p solve.py test.txt
+
+edit2: solve2.py test2.txt
+	vim -p solve2.py test2.txt
+
+loop:
+	ls *.py | entr -rcs "make -s solve"
+
+loop2:
+	ls *.py | entr -rcs "make -s solve2"
+
+looptest:
+	ls *.py | entr -rcs "make -s solvetest"
+
+looptest2:
+	ls *.py | entr -rcs "make -s solvetest2"
+
+solve: solve1 solve2
+solve1:
+	python3 solve.py < input.txt
+	@echo "(.. p1)"
+solve2:
+	python3 solve2.py < input.txt
+	@echo "(.. p2)"
+
+test2: solvetest2
+solvetest: solvetest1 solvetest2
+solvetest1:
+	python3 solve.py < test.txt
+	@echo "(.. p1 test)"
+
+solvetest2:
+	python3 solve2.py < test2.txt
+	@echo "(.. p2 test)"
+
+input: input.txt
+input.txt:
+	curl 'https://adventofcode.com/$(YEAR)/day/$(shell basename $(CURDIR))/input' \
+	  -H 'cookie: session=$(shell cat ../cookie)' > input.txt
+
+level: level.html
+level.html:
+	curl "https://adventofcode.com/$(YEAR)/day/$(shell basename $(CURDIR))" \
+	  -H 'cookie: session=$(shell cat ../cookie)' > level.html
+
+solve2.py:
+	cp solve.py solve2.py
+
+test2.txt:
+	cp test.txt test2.txt
+
+span: level.html
+	htmlq -f level.html span[title] 
+
+wait:
+	snooze -H2
