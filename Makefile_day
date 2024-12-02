@@ -13,8 +13,8 @@ loop:
 loop2:
 	ls *.py | entr -rcs "make -s solve2"
 
-looptest:
-	ls *.py | entr -rcs "make -s solvetest"
+looptest1:
+	ls *.py | entr -rcs "make -s solvetest1"
 
 looptest2:
 	ls *.py | entr -rcs "make -s solvetest2"
