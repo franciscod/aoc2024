@@ -2,10 +2,10 @@ YEAR = 2024
 
 edit:
 	touch -a solve.py test.txt
-	vim -p solve.py test.txt
+	nvim -p solve.py test.txt
 
 edit2: solve2.py test2.txt
-	vim -p solve2.py test2.txt
+	nvim -p solve2.py test2.txt
 
 loop:
 	ls *.py | entr -rcs "make -s solve"
