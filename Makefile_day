@@ -19,6 +19,9 @@ looptest1:
 looptest2:
 	ls *.py | entr -rcs "make -s solvetest2"
 
+looptest:
+	ls *.py | entr -rcs "make -s solvetest"
+
 solve: solve1 solve2
 solve1:
 	python3 solve.py < input.txt
