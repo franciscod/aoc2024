@@ -45,6 +45,7 @@ input.txt:
 	curl 'https://adventofcode.com/$(YEAR)/day/$(shell basename $(CURDIR))/input' \
 	  -H 'cookie: session=$(shell cat ../cookie)' > input.txt
 
+pre: pre.txt
 pre.txt: level.html
 	htmlq -t -f level.html pre > pre.txt
 
