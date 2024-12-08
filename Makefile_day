@@ -2,7 +2,7 @@ YEAR = 2024
 
 edit:
 	touch -a solve.py test.txt
-	nvim -p solve.py test.txt
+	nvim -p solve.py test.txt pre.txt level.html
 
 edit2: solve2.py test2.txt
 	nvim -p solve2.py test2.txt
@@ -44,6 +44,9 @@ input: input.txt
 input.txt:
 	curl 'https://adventofcode.com/$(YEAR)/day/$(shell basename $(CURDIR))/input' \
 	  -H 'cookie: session=$(shell cat ../cookie)' > input.txt
+
+pre.txt: level.html
+	htmlq -t -f level.html pre > pre.txt
 
 level: level.html
 level.html:
