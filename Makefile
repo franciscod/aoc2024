@@ -5,3 +5,4 @@ today: $(TODAY)/Makefile
 $(TODAY)/Makefile:
 	mkdir -p $(TODAY)
 	ln -sr Makefile_day $(TODAY)/Makefile
+	ln -sr lib.py $(TODAY)/lib.py
