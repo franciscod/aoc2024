@@ -1,7 +1,7 @@
 from lib import *
 
 lines = inputlines()
-# mp = readmp(lines)
+# rows, cols, mp, rmp = readmp(lines)
 
 s = 0
 for l in lines:
