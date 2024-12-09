@@ -2,6 +2,7 @@ import fileinput
 
 from collections import defaultdict
 from itertools import combinations
+from itertools import product
 
 def pairs(s):
     return combinations(s, 2)

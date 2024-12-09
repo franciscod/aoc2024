@@ -1,10 +1,8 @@
-import fileinput
-from itertools import product
+from lib import *
 
 data = []
 
-for line in fileinput.input():
-    line = line.strip()
+for line in inputlines():
     a, r = line.split(':')
     a = int(a)
     r = list(map(int, r.split()))
