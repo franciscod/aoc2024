@@ -1,14 +1,11 @@
-import fileinput
-from collections import defaultdict
-from functools import cmp_to_key
+from lib import *
 
 rules = []
 prods = []
 
 after = defaultdict(set)
 
-for line in fileinput.input():
-    line = line.strip()
+for line in inputlines():
     if line == '':
         continue
     if '|' in line:

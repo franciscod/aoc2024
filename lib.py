@@ -3,6 +3,7 @@ import fileinput
 from collections import defaultdict
 from itertools import combinations
 from itertools import product
+from functools import cmp_to_key
 
 def pairs(s):
     return combinations(s, 2)
