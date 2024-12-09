@@ -45,3 +45,34 @@ def inputlines():
         line = line.strip()
         lines.append(line)
     return lines
+
+
+nd8 = (
+    (-1, -1),
+    (-1,  0),
+    (-1,  1),
+    ( 0, -1),
+    ( 0,  1),
+    ( 1, -1),
+    ( 1,  0),
+    ( 1,  1),
+)
+
+nd4d = (
+    (-1, -1),
+    (-1,  1),
+    ( 1, -1),
+    ( 1,  1),
+)
+
+nd4a = (
+    (-1,  0),
+    ( 1,  0),
+    ( 0, -1),
+    ( 0,  1),
+)
+
+
+def dopp(d):
+    dy, dx = d
+    return -dy, -dx

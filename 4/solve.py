@@ -1,5 +1,4 @@
-import re
-import fileinput
+from lib import *
 
 ts = 0
 en = True
@@ -7,28 +6,8 @@ mp = {}
 cols = 0 
 
 xs = set()
-d8 = (
-    (-1, -1),
-    (-1,  0),
-    (-1,  1),
-    ( 0, -1),
-    ( 0,  1),
-    ( 1, -1),
-    ( 1,  0),
-    ( 1,  1),
-)
 
-def readmp():
-    for y, line in enumerate(fileinput.input()):
-        line = line.strip()
-        rows = y+1
-        for x, c in enumerate(line):
-            if c != '.':
-                mp[y,x] = c
-
-            cols = x+1
-
-readmp()
+rows, cols, mp, _ = readmp(inputlines())
 
 for y, x in mp:
     c = mp[y,x]
@@ -52,7 +31,7 @@ def findnmp(p, d, rest):
 
 k = 0
 for p in xs:
-    for d in d8:
+    for d in nd8:
         k += findnmp(p, d, "MAS")
 
 print(k)
