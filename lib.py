@@ -77,3 +77,12 @@ nd4a = (
 def dopp(d):
     dy, dx = d
     return -dy, -dx
+
+def neighs(p, ns):
+    py, px = p
+    for n in ns:
+        ny, nx = n
+        yield (py+ny, px+nx)
+
+def parseints(s):
+    return list(map(int, s.split()))

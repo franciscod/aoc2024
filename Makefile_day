@@ -1,11 +1,13 @@
 YEAR = 2024
 
+tryhard: wait input level pre edit
+
 edit:
 	touch -a solve.py test.txt
-	nvim -p solve.py test.txt pre.txt level.html
+	nvim -p solve.py test.txt pre.txt lib.py
 
 edit2: solve2.py test2.txt
-	nvim -p solve2.py test2.txt
+	nvim -p solve2.py test2.txt pre.txt lib.py
 
 loop:
 	ls *.py | entr -rcs "make -s solve"
@@ -30,7 +32,10 @@ solve2:
 	python3 solve2.py < input.txt
 	@echo "(.. p2)"
 
+test: solvetest
+test1: solvetest1
 test2: solvetest2
+
 solvetest: solvetest1 solvetest2
 solvetest1:
 	python3 solve.py < test.txt
