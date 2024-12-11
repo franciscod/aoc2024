@@ -10,19 +10,19 @@ edit2: solve2.py test2.txt
 	nvim -p solve2.py test2.txt pre.txt lib.py
 
 loop:
-	ls *.py | entr -rcs "make -s solve"
+	ls *.py *.txt | entr -rcs "make -s solve"
 
 loop2:
-	ls *.py | entr -rcs "make -s solve2"
+	ls *.py *.txt | entr -rcs "make -s solve2"
 
 looptest1:
-	ls *.py | entr -rcs "make -s solvetest1"
+	ls *.py *.txt | entr -rcs "make -s solvetest1"
 
 looptest2:
-	ls *.py | entr -rcs "make -s solvetest2"
+	ls *.py *.txt | entr -rcs "make -s solvetest2"
 
 looptest:
-	ls *.py | entr -rcs "make -s solvetest"
+	ls *.py *.txt | entr -rcs "make -s solvetest"
 
 solve: solve1 solve2
 solve1:
