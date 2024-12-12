@@ -1,4 +1,5 @@
 import fileinput
+from pprint import pprint
 
 from collections import Counter
 from collections import defaultdict
@@ -83,6 +84,12 @@ def neighs(p, ns):
     for n in ns:
         ny, nx = n
         yield (py+ny, px+nx)
+
+def neighsd(p, ns):
+    py, px = p
+    for n in ns:
+        ny, nx = n
+        yield (py+ny, px+nx), n
 
 def parseints(s):
     return list(map(int, s.split()))
