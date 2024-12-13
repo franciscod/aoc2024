@@ -4,10 +4,10 @@ tryhard: wait input level pre edit
 
 edit:
 	touch -a solve.py test.txt
-	nvim -p solve.py test.txt pre.txt lib.py
+	nvim -p solve.py test.txt pre.txt input.txt lib.py 
 
 edit2: solve2.py test2.txt
-	nvim -p solve2.py test2.txt pre.txt lib.py
+	nvim -p solve2.py test2.txt pre.txt input.txt lib.py 
 
 loop:
 	ls *.py *.txt | entr -rcs "make -s solve"

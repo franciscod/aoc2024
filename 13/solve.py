@@ -1,7 +1,5 @@
 from lib import *
-from functools import lru_cache
 
-import sys
 sys.setrecursionlimit(2999)
 
 

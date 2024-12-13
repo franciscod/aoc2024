@@ -1,4 +1,6 @@
 import fileinput
+import sys
+
 from pprint import pprint
 
 from collections import Counter
@@ -6,6 +8,11 @@ from collections import defaultdict
 from itertools import combinations
 from itertools import product
 from functools import cmp_to_key
+from functools import lru_cache
+
+from sympy.solvers import solve
+from sympy import Symbol
+from sympy.core.numbers import Integer
 
 def pairs(s):
     return combinations(s, 2)

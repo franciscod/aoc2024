@@ -1,15 +1,9 @@
 from lib import *
-from functools import lru_cache
-
-from sympy.solvers import solve
-from sympy import Symbol
-from sympy.core.numbers import Integer
 
 sa = Symbol('sa')
 sb = Symbol('sb')
 
-import sys
-sys.setrecursionlimit(2999)
+# sys.setrecursionlimit(2999)
 
 
 lines = inputlines()
