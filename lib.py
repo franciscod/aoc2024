@@ -10,9 +10,12 @@ from itertools import product
 from functools import cmp_to_key
 from functools import lru_cache
 
+from parse import parse
+
 from sympy.solvers import solve
 from sympy import Symbol
 from sympy.core.numbers import Integer
+
 
 def pairs(s):
     return combinations(s, 2)

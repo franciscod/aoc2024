@@ -1,6 +1,7 @@
 YEAR = 2024
 
-tryhard: wait input level pre edit
+tryhard: wait all
+all: input level pre edit
 
 edit:
 	touch -a solve.py test.txt
