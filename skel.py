@@ -3,6 +3,8 @@ from lib import *
 
 lines = inputlines()
 # rows, cols, mp, rmp = readmp(lines)
+# rows, cols, mp, rmp = widemp(mp)
+# printmp(mp, rows, cols)
 
 s = 0
 for l in lines:

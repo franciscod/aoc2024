@@ -16,28 +16,10 @@ mvlines = list(ilines)
 
 rows, cols, mp, rmp = readmp(mplines)
 
-mp2 = {}
-for p, c in mp.items():
-    py, px = p
-    px1 = px*2
-    px2 = px*2+1
-    if c == '.':
-        continue
+rows, cols2, mp2, rmp2 = widemp(mp, rows, cols)
+at = list(rmp2['@'])[0]
 
-    c2 = c
-    c1 = c
-    if c == 'O':
-        c1, c2 = '[]'
-
-    mp2[py, px1] = c1
-    if c == '@':
-        at = py, px1
-        continue
-    mp2[py, px2] = c2
-
-cols = cols * 2
 mp = mp2
-
 rmp = {}
 
 
@@ -46,16 +28,9 @@ for l in mvlines:
     for c in l:
         moves.append(c)
 
-printmp(mp, rows, cols)
+# printmp(mp, rows, cols)
 # print(moves)
 
-cdirs = "^v<>"
-nd4a = (
-    (-1,  0),
-    ( 1,  0),
-    ( 0, -1),
-    ( 0,  1),
-)
 
 
 def dopush(p, d, o=False, dry=False):
@@ -125,7 +100,7 @@ for i, m in enumerate(moves):
     if i == 7:
         DEBUG = True
     lf = at
-    d = nd4a[cdirs.index(m)]
+    d = c2d(m)
     at = domove(lf, d)
     # printmp(mp, rows, cols)
 
