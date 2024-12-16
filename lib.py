@@ -28,6 +28,8 @@ def inbounds(p, lb, ub):
     return (ly <= py < uy) and (lx <= px < ux)
 
 def readmp(lines):
+    rows = 0
+    cols = 0
     m = {}
     rm = defaultdict(set)
     for y, line in enumerate(lines):
