@@ -129,5 +129,5 @@ def neighsd(p, ns):
         ny, nx = n
         yield (py+ny, px+nx), n
 
-def parseints(s):
-    return list(map(int, s.split()))
+def parseints(s, sep=None):
+    return list(map(int, s.split(sep)))
