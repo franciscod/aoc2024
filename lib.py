@@ -8,7 +8,7 @@ from collections import defaultdict
 from itertools import combinations
 from itertools import product
 from functools import cmp_to_key
-from functools import lru_cache
+from functools import lru_cache, cache
 
 from parse import parse
 

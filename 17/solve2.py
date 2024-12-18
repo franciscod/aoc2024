@@ -79,17 +79,36 @@ def xc(machine):
 
     raise IndexError
 
+def inspect(a, best):
+    print("? ", best, oct(a))
+
+    clues = {}
+    i = 0
+    while a:
+        la = a & 7
+        li = la^3
+        print("i: ", i*3,  7 & a,
+              "li:", i*3+li, 7 & (a >> li))
+        clues[i*3] = 7&a
+        clues[i*3+li] = 7&(a >> li)
+        a = a >> 3
+        i += 1
+    return clues
 
 def crank2(machine):
     a, b, c, *rest = machine
-    while a != 0:
-        b = a & 0b111 # bst a
-        b = b ^ 0b011
-        c = a >> b
-        b = b ^ 0b101
-        a = a >> 3
-        b = b ^ c
-        yield b & 0b111
+    i = 0
+    while (a >> 3*i) != 0:
+        i0 = 3*i
+        ai0 = a >> i0 & 7
+
+        i1 = i0 + (ai0 ^ 3)
+        ai1 = a >> i1 & 7
+
+        b6 = 6 ^ ai0 ^ ai1
+        yield b6, ((i0, ai0), (i1, ai1))
+
+        i += 1
 
 def crank(machine):
     while True:
@@ -102,30 +121,84 @@ def crank(machine):
         if out:
             yield from out
 
-output = []
-imachine = machine
-best = 0
+def f(a):
+    if a == 0:
+        return 0, 0
 
-for a in range(9999999999):
-    machine = a, *imachine[1:]
-    progress = 0
-    for got, expected in zip(crank2(machine), insns):
-        # print(got, expected)
-        if got == expected:
-            progress += 1
-        else:
-            break
-    if progress == best:
-        print(a, end=", ", flush=True)
-    if progress > best:
-        best = progress
-        print("!")
-        print(a, progress, "/", len(insns))
-        print("--0>", oct(a))
-        print("--1>", oct(a << 1))
-        print("--2>", oct(a << 2))
-        print("--3>", oct(a << 3))
-        if best == len(insns):
-            print(a)
-            exit(0)
-            
+    na = a >> 3
+
+    i0 = 0
+    ai0 = a >> i0 & 7
+
+    i1 = i0 + (ai0 ^ 3)
+    ai1 = a >> i1 & 7
+
+    b6 = 6 ^ ai0 ^ ai1
+    return b6, na
+
+def matchsufflen(a, b):
+    l = 1
+    while True:
+        if a[-l:] != b[-l:]:
+            return l-1
+        l += 1
+
+imachine = machine
+insns = tuple(insns)
+
+bestlen = 0
+# known values of A matching suffix of len K
+knowns = defaultdict(set)
+knowns[bestlen].add(0)
+
+suffix = {}
+suffix[0] = True
+
+for a in range(0o10000):
+    gas = tuple(crank((a, 0, 0, 0, insns)))
+    nl = len(gas)
+    g = gas[0]
+
+    suffix[a] = insns[-nl:] == gas
+    if suffix[a]:
+        knowns[nl].add(a)
+        bestlen = nl
+        # print(a, gas)
+
+
+print(insns)
+search = True
+while search:
+    search = False
+    for b in knowns[bestlen]:
+        # print(bestlen, b)
+        for od in range(3):
+            for c in range(1<<od*3):
+                # print(bestlen, b, c)
+                a = b << od*3 | c
+
+
+                gas = tuple(crank((a, 0, 0, 0, insns)))
+                nl = len(gas)
+                g = gas[0]
+                na = a >> 3
+
+                suffix[a] = insns[-nl:] == gas
+
+                if nl > bestlen:
+                    bestlen = nl
+                    search = True
+
+                if suffix[a]:
+                    knowns[nl].add(a)
+                    gas = tuple(crank((a, 0, 0, 0, insns)))
+                    # print(g, gas)
+                    if gas == insns:
+                        print(a)
+                        exit(0)
+
+# 23070159490600
+# TOO LOW
+# 216584205979245
+# TOO HIGH
+# 234176392023743
