@@ -6,6 +6,7 @@ from pprint import pprint
 from collections import Counter
 from collections import defaultdict
 from itertools import combinations
+from itertools import permutations
 from itertools import product
 from functools import cmp_to_key
 from functools import lru_cache, cache
@@ -109,6 +110,9 @@ nd4a = (
 )
 
 cdirs = "^v<>"
+
+def d2c(d):
+    return cdirs[nd4a.index(d)]
 
 def c2d(c):
     return nd4a[cdirs.index(c)]

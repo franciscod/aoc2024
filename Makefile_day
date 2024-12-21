@@ -3,7 +3,7 @@ YEAR = 2024
 tryhard: wait all
 all: input level pre edit
 
-edit:
+edit: test.txt
 	touch -a solve.py test.txt
 	nvim -p solve.py test.txt pre.txt input.txt lib.py 
 
@@ -62,6 +62,9 @@ level.html:
 
 solve2.py:
 	cp solve.py solve2.py
+
+test.txt: pre.txt
+	cp pre.txt test.txt
 
 test2.txt:
 	cp test.txt test2.txt
