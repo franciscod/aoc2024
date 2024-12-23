@@ -8,8 +8,11 @@ lines = inputlines()
 # printmp(mp, rows, cols)
 
 s = 0
-for l in lines:
-    s += len(l)
 
-print("?")
-print(s)
+G = nx.Graph()
+for l in lines:
+    a, b = l.split('-')
+    G.add_edge(a,b)
+
+cq = sorted(nx.find_cliques(G), key=len)[-1]
+print(','.join(sorted(cq)))
